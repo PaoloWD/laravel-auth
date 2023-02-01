@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return('admin.projects.create');
     }
 
     /**
@@ -36,9 +36,17 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $post = Post::create([
+            ...$data,
+           
+            "user_id" => Auth::id()
+        ]);
+
+        return redirect()->route("admin.projects.show", $project->id);
     }
 
     /**
@@ -49,7 +57,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view("admin.projects.show", compact("project"));
     }
 
     /**

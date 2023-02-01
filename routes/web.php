@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\DashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', [DashboardController::class, 'home'])->name('dashboard');
+
 
 
 
@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified'])
 ->prefix('admin') // porzione di uri che verrà inserita prima di ogni rotta
 ->name('admin.')
 ->group(function(){
+    Route::get('/dashboard', [DashboardController::class, 'home'])->name('dashboard');
     Route::resource('projects', DashboardController::class);
 });
 

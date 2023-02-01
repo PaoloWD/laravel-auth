@@ -37,6 +37,8 @@
                         @endforeach
                         
                       </table>
+
+                      <a href="{{ route('admin.projects.create')}}" class="btn btn-primary">Aggiungi</a>
                 </div>
             </div>
         </div>
