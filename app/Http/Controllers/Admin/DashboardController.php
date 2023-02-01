@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreProjectRequest;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller {
     public function home() {
@@ -15,7 +17,7 @@ class DashboardController extends Controller {
         $user = Auth::user();
         if ($user->role === "admin") {
 
-            $users = Project::all();
+            $users = User::all();
         }
 
         return view("admin.projects.dashboard", compact('users'));
@@ -33,13 +35,11 @@ class DashboardController extends Controller {
      */
     public function store(StoreProjectRequest $request)
     {
-        $data = $request->validated();
+         $data = $request->validated();
 
-        $project = Project::create([
-            ...$data,
-        ]);
+        $project = Project::create($data);
 
-        return redirect()->route("admin.projects.show", $project->id);
+        return redirect()->route("admin.projects.show", $project->id); 
     }
 
     /**

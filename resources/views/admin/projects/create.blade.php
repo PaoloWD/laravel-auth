@@ -1,5 +1,17 @@
 @extends('layouts.app')
 @section('content')
+@if ($errors->any())
+        <div class="alert alert-danger">
+        I dati inseriti non sono validi:
+
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        </div>
+    @endif
+
 <form action="{{ route('admin.projects.store') }}" method="POST">
     @csrf
     <div class="input-group input-group-sm mb-3">
@@ -29,6 +41,8 @@
         </div>
       @enderror
     </div>
-    <button class="btn btn-primary">Salva</button>
+    
+    <button type="submit" class="btn btn-primary">Salva</button>
+
 </form>
 @endsection

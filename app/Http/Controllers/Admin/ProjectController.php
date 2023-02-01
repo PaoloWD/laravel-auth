@@ -8,6 +8,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Facades\Validator;
 
+
 class ProjectController extends Controller
 {
     /**
@@ -39,8 +40,7 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
-
-        $post = Post::create([
+        $project = Project::create([
             ...$data,
            
             "user_id" => Auth::id()
