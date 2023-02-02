@@ -9,6 +9,7 @@
     <h5 class="card-title">Nome repo: {{$project->name}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">Descrizione repo: {{$project->description}}</h6>
     <p class="card-text">Link GitHub: {{$project->link}}</p>
+    <a href="{{ route('admin.dashboard')}}" class="btn btn-primary mt-5">Torna indietro</a>
       {{-- <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-primary">
         Modifica
       </a>

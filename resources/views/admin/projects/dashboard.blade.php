@@ -25,13 +25,13 @@
                             <th scope="col">Link GitHub</th>
                           </tr>
                         </thead>
-                        @foreach ($users as $user)
+                        @foreach ($projects as $project)
                         <tbody class="table-group-divider">
                             <tr>
-                              <th scope="row">{{$user->id}}</th>
-                              <td>{{$user->name}}</td>
-                              <td>{{$user->email}}</td>
-                              <td>{{$user->link}}</td>
+                              <th scope="row">{{$project->id}}</th>
+                              <td>{{$project->name}}</td>
+                              <td>{{$project->email}}</td>
+                              <td>{{$project->link}}</td>
                             </tr>
                           </tbody>
                         @endforeach

@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -18,8 +19,15 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        
+        $user = Auth::user();
+        if ($user->role === "admin") {
+
+            $projects = Project::all();
+        }
+        return view("admin.projects.dashboard", compact('projects'));
     }
+    
+    
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +36,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return('admin.projects.create');
+        return view('admin.projects.create');
     }
 
     /**
@@ -40,11 +48,7 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
-        $project = Project::create([
-            ...$data,
-           
-            "user_id" => Auth::id()
-        ]);
+        $project = Project::create($data);
 
         return redirect()->route("admin.projects.show", $project->id);
     }
