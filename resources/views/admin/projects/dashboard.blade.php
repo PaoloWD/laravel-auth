@@ -16,13 +16,15 @@
 
                     {{ __('You are logged in!') }}
                     <br>
-                    <table class="table">
+                    <h3 class="mt-5">Lista Progetti</h3>
+                    <table class="table mb-5">
                         <thead>
-                          <tr>
+                          <tr class="text-center">
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Link GitHub</th>
+                            <th scope="col">Manage</th>
                           </tr>
                         </thead>
                         @foreach ($projects as $project)
@@ -30,15 +32,49 @@
                             <tr>
                               <th scope="row">{{$project->id}}</th>
                               <td>{{$project->name}}</td>
-                              <td>{{$project->email}}</td>
-                              <td>{{$project->link}}</td>
+                              <td>{{Str::limit($project->description, 10)}}</td>
+                              <td>{{Str::limit($project->link, 10)}}</td>
+                              <td class="text-center"><a href={{route("admin.projects.edit", $project->id)}} class="btn btn-primary">E</a>
+                                <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="delete-form d-inline-block">
+                                  @csrf()
+                                  @method('delete')
+                    
+                                  <button class="btn btn-danger">
+                                    X
+                                  </button>
+                                </form></td> 
+                              
                             </tr>
                           </tbody>
                         @endforeach
-                        
                       </table>
+                      <a href="{{ route('admin.projects.create')}}" class="btn btn-primary">Aggiungi progetto</a>
+                        
+                      <h3>Lista Utenti</h3>
+                      <table class="table mb-4">
+                        <thead>
+                          <tr class="text-center">
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Permitions</th>
+                            <th scope="col">Manage</th>
+                          </tr>
+                        </thead>
+                        @foreach ($users as $user)
+                        <tbody class="table-group-divider">
+                            <tr>
+                              <th scope="row">{{$user->id}}</th>
+                              <td>{{$user->name}}</td>
+                              <td>{{Str::limit($user->email, 10)}}</td>
+                              <td>{{$user->role}}</td>
+                            </tr>
+                          </tbody>
+                        @endforeach
+                      </table>
+                        
 
-                      <a href="{{ route('admin.projects.create')}}" class="btn btn-primary">Aggiungi</a>
+                      
                 </div>
             </div>
         </div>

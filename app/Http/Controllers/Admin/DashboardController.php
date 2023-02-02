@@ -18,9 +18,10 @@ class DashboardController extends Controller {
         if ($user->role === "admin") {
 
             $users = User::all();
+            $projects = Project::all();
         }
 
-        return view("admin.projects.dashboard", compact('users'));
+        return view("admin.projects.dashboard", compact('users', 'projects'));
     }
     public function create()
     {
@@ -61,7 +62,7 @@ class DashboardController extends Controller {
      */
     public function edit(Project $project)
     {
-        //
+        return route('admin.projects.edit', compact('project'));
     }
 
     /**

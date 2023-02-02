@@ -31,7 +31,7 @@ Route::middleware(['auth', 'verified'])
 ->prefix('admin') // porzione di uri che verrà inserita prima di ogni rotta
 ->name('admin.')
 ->group(function(){
-    Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'home'])->name('dashboard');
     Route::resource('projects', ProjectController::class);
 });
 

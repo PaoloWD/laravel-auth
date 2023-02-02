@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
 @if ($errors->any())
         <div class="alert alert-danger">
         I dati inseriti non sono validi:
@@ -13,11 +12,12 @@
         </div>
     @endif
 
-<form action="{{ route('admin.projects.store') }}" method="POST">
+<form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
     @csrf
-    <div class="input-group input-group-sm my-5">
+    @method('put')
+    <div class="input-group input-group-sm mb-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Nome Progetto</span>
-        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{$project->name}}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         @error('name')
         <div class="invalid-feedback">
           {{ $message }}
@@ -26,7 +26,7 @@
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Descrizione progetto</label>
-        <textarea class="form-control form-control @error('description') is-invalid @enderror" name="description" id="exampleFormControlTextarea1" rows="3">{{old('description')}}</textarea>
+        <textarea class="form-control form-control @error('description') is-invalid @enderror" name="description" id="exampleFormControlTextarea1" rows="3">{{$project->description}}</textarea>
         @error('description')
         <div class="invalid-feedback">
           {{ $message }}
@@ -35,7 +35,7 @@
     </div>
     <div class="input-group input-group-sm mb-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Link Git</span>
-        <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" value="{{old('link')}}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" value="{{$project->link}}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         @error('link')
         <div class="invalid-feedback">
           {{ $message }}
@@ -46,5 +46,4 @@
     <button type="submit" class="btn btn-primary">Salva</button>
 
 </form>
-</div>
 @endsection
