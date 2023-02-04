@@ -19,9 +19,9 @@ class DashboardController extends Controller {
 
             $users = User::all();
             $projects = Project::all();
-        }
+            return view("admin.projects.dashboard", compact('users', 'projects'));
+        } 
 
-        return view("admin.projects.dashboard", compact('users', 'projects'));
     }
     public function create()
     {

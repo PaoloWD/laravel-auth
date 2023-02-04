@@ -31,6 +31,7 @@
                         <tbody class="table-group-divider">
                             <tr>
                               <th scope="row">{{$project->id}}</th>
+                              <td><img src="{{ asset('storage/' . $project->cover_img) }}" alt=""></td>
                               <td>{{$project->name}}</td>
                               <td>{{Str::limit($project->description, 10)}}</td>
                               <td>{{Str::limit($project->link, 10)}}</td>

@@ -12,5 +12,6 @@ class Project extends Model
         'name',
         'description',
         'link',
+        'cover_img'
     ];
 }

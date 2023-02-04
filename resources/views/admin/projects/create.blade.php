@@ -13,7 +13,7 @@
         </div>
     @endif
 
-<form action="{{ route('admin.projects.store') }}" method="POST">
+<form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="input-group input-group-sm my-5">
         <span class="input-group-text" id="inputGroup-sizing-sm">Nome Progetto</span>
@@ -42,6 +42,16 @@
         </div>
       @enderror
     </div>
+
+    <div class="input-group">
+      <input name="cover_img" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+      <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+    </div>
+    @error('cover_img')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+  @enderror
     
     <button type="submit" class="btn btn-primary">Salva</button>
 

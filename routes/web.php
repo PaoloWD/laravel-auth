@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
-
+use App\Http\Controllers\PublicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +34,8 @@ Route::middleware(['auth', 'verified'])
     Route::get('/dashboard', [DashboardController::class, 'home'])->name('dashboard');
     Route::resource('projects', ProjectController::class);
 });
+
+Route::resource('public', PublicController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
